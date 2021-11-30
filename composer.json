@@ -1,0 +1,22 @@
+{
+    "name": "xonnex/adventofcode2020",
+    "authors": [
+        {
+            "name": "XonneX",
+            "email": "baumannjanik@gmail.com"
+        }
+    ],
+    "require-dev": {
+        "phpunit/phpunit": "^9.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "XonneX\\AdventOfCode\\": "src/AdventOfCode"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "XonneX\\AdventOfCode\\": "tests/AdventOfCode"
+        }
+    }
+}
