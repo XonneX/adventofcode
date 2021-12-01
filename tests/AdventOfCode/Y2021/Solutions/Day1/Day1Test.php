@@ -13,11 +13,27 @@ class Day1Test extends TestCase
         $day1 = new Day1();
 
         $day1->setDebugInput(<<<TXT
-NO_EXAMPLE_INITIALIZED
+199
+200
+208
+210
+200
+207
+240
+269
+260
+263
 TXT
         );
 
-        self::assertSame('NO_SOLUTION_INITIALIZED', $day1->solvePartOne());
+        self::assertSame('7', $day1->solvePartOne());
+    }
+
+    public function testSolvePartOneWrong(): void
+    {
+        $day1 = new Day1();
+
+        self::assertNotSame('100', $day1->solvePartOne());
     }
 
     public function testSolvePartOne(): void
@@ -32,17 +48,26 @@ TXT
         $day1 = new Day1();
 
         $day1->setDebugInput(<<<TXT
-NO_EXAMPLE_INITIALIZED
+199
+200
+208
+210
+200
+207
+240
+269
+260
+263
 TXT
         );
 
-        self::assertSame('NO_SOLUTION_INITIALIZED', $day1->solvePartTwo());
+        self::assertSame('5', $day1->solvePartTwo());
     }
 
     public function testSolvePartTwo(): void
     {
         $day1 = new Day1();
 
-        self::assertSame('NO_SOLUTION_INITIALIZED', $day1->solvePartTwo());
+        self::assertSame('1491', $day1->solvePartTwo());
     }
 }
