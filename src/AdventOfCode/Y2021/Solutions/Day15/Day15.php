@@ -11,7 +11,7 @@ class Day15 extends AbstractSolution
 {
     public function __construct()
     {
-        parent::__construct(2020, 15);
+        parent::__construct(2021, 15);
     } 
 
     protected function partOne(string $input): string

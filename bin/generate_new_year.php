@@ -29,7 +29,7 @@ class Day{{ DAY }} extends AbstractSolution
 {
     public function __construct()
     {
-        parent::__construct(2020, {{ DAY }});
+        parent::__construct({{ YEAR }}, {{ DAY }});
     } 
 
     protected function partOne(string $input): string
