@@ -33,8 +33,8 @@
 
 | Day | Part One Solution | Part Two Solution | PHP Source | PHP Unit Test | Input |
 |---|---|---|---|---|---|
-| 1 | Skipped part 1 because "Not implemented yet"| Skipped part 2 because "Not implemented yet"| [Day1.php](src/AdventOfCode/Y2021/Solutions/Day1/Day1.php) | [Day1Test.php](tests/AdventOfCode/Y2021/Solutions/Day1/Day1Test.php) | [input.txt](inputs/2021/day1/input.txt) |
-| 2 | Skipped part 1 because "Not implemented yet"| Skipped part 2 because "Not implemented yet"| [Day2.php](src/AdventOfCode/Y2021/Solutions/Day2/Day2.php) | [Day2Test.php](tests/AdventOfCode/Y2021/Solutions/Day2/Day2Test.php) | [input.txt](inputs/2021/day2/input.txt) |
+| 1 | 1466| 1491| [Day1.php](src/AdventOfCode/Y2021/Solutions/Day1/Day1.php) | [Day1Test.php](tests/AdventOfCode/Y2021/Solutions/Day1/Day1Test.php) | [input.txt](inputs/2021/day1/input.txt) |
+| 2 | 1383564| 1488311643| [Day2.php](src/AdventOfCode/Y2021/Solutions/Day2/Day2.php) | [Day2Test.php](tests/AdventOfCode/Y2021/Solutions/Day2/Day2Test.php) | [input.txt](inputs/2021/day2/input.txt) |
 | 3 | Skipped part 1 because "Not implemented yet"| Skipped part 2 because "Not implemented yet"| [Day3.php](src/AdventOfCode/Y2021/Solutions/Day3/Day3.php) | [Day3Test.php](tests/AdventOfCode/Y2021/Solutions/Day3/Day3Test.php) | [input.txt](inputs/2021/day3/input.txt) |
 | 4 | Skipped part 1 because "Not implemented yet"| Skipped part 2 because "Not implemented yet"| [Day4.php](src/AdventOfCode/Y2021/Solutions/Day4/Day4.php) | [Day4Test.php](tests/AdventOfCode/Y2021/Solutions/Day4/Day4Test.php) | [input.txt](inputs/2021/day4/input.txt) |
 | 5 | Skipped part 1 because "Not implemented yet"| Skipped part 2 because "Not implemented yet"| [Day5.php](src/AdventOfCode/Y2021/Solutions/Day5/Day5.php) | [Day5Test.php](tests/AdventOfCode/Y2021/Solutions/Day5/Day5Test.php) | [input.txt](inputs/2021/day5/input.txt) |

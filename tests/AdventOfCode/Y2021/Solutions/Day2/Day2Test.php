@@ -13,18 +13,23 @@ class Day2Test extends TestCase
         $day2 = new Day2();
 
         $day2->setDebugInput(<<<TXT
-NO_EXAMPLE_INITIALIZED
+forward 5
+down 5
+forward 8
+up 3
+down 8
+forward 2
 TXT
         );
 
-        self::assertSame('NO_SOLUTION_INITIALIZED', $day2->solvePartOne());
+        self::assertSame('150', $day2->solvePartOne());
     }
 
     public function testSolvePartOne(): void
     {
         $day2 = new Day2();
 
-        self::assertSame('NO_SOLUTION_INITIALIZED', $day2->solvePartOne());
+        self::assertSame('1383564', $day2->solvePartOne());
     }
 
     public function testSolvePartTwoExample(): void
@@ -32,17 +37,22 @@ TXT
         $day2 = new Day2();
 
         $day2->setDebugInput(<<<TXT
-NO_EXAMPLE_INITIALIZED
+forward 5
+down 5
+forward 8
+up 3
+down 8
+forward 2
 TXT
         );
 
-        self::assertSame('NO_SOLUTION_INITIALIZED', $day2->solvePartTwo());
+        self::assertSame('900', $day2->solvePartTwo());
     }
 
     public function testSolvePartTwo(): void
     {
         $day2 = new Day2();
 
-        self::assertSame('NO_SOLUTION_INITIALIZED', $day2->solvePartTwo());
+        self::assertSame('1488311643', $day2->solvePartTwo());
     }
 }
