@@ -13,18 +13,27 @@ class Day5Test extends TestCase
         $day5 = new Day5();
 
         $day5->setDebugInput(<<<TXT
-NO_EXAMPLE_INITIALIZED
+0,9 -> 5,9
+8,0 -> 0,8
+9,4 -> 3,4
+2,2 -> 2,1
+7,0 -> 7,4
+6,4 -> 2,0
+0,9 -> 2,9
+3,4 -> 1,4
+0,0 -> 8,8
+5,5 -> 8,2
 TXT
         );
 
-        self::assertSame('NO_SOLUTION_INITIALIZED', $day5->solvePartOne());
+        self::assertSame('5', $day5->solvePartOne());
     }
 
     public function testSolvePartOne(): void
     {
         $day5 = new Day5();
 
-        self::assertSame('NO_SOLUTION_INITIALIZED', $day5->solvePartOne());
+        self::assertSame('3990', $day5->solvePartOne());
     }
 
     public function testSolvePartTwoExample(): void
@@ -32,17 +41,26 @@ TXT
         $day5 = new Day5();
 
         $day5->setDebugInput(<<<TXT
-NO_EXAMPLE_INITIALIZED
+0,9 -> 5,9
+8,0 -> 0,8
+9,4 -> 3,4
+2,2 -> 2,1
+7,0 -> 7,4
+6,4 -> 2,0
+0,9 -> 2,9
+3,4 -> 1,4
+0,0 -> 8,8
+5,5 -> 8,2
 TXT
         );
 
-        self::assertSame('NO_SOLUTION_INITIALIZED', $day5->solvePartTwo());
+        self::assertSame('12', $day5->solvePartTwo());
     }
 
     public function testSolvePartTwo(): void
     {
         $day5 = new Day5();
 
-        self::assertSame('NO_SOLUTION_INITIALIZED', $day5->solvePartTwo());
+        self::assertSame('21305', $day5->solvePartTwo());
     }
 }
