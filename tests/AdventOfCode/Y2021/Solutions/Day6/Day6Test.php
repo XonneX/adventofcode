@@ -32,17 +32,17 @@ TXT
         $day6 = new Day6();
 
         $day6->setDebugInput(<<<TXT
-NO_EXAMPLE_INITIALIZED
+3,4,3,1,2
 TXT
         );
 
-        self::assertSame('NO_SOLUTION_INITIALIZED', $day6->solvePartTwo());
+        self::assertSame('26984457539', $day6->solvePartTwo());
     }
 
     public function testSolvePartTwo(): void
     {
         $day6 = new Day6();
 
-        self::assertSame('NO_SOLUTION_INITIALIZED', $day6->solvePartTwo());
+        self::assertSame('1629570219571', $day6->solvePartTwo());
     }
 }
