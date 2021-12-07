@@ -13,18 +13,18 @@ class Day7Test extends TestCase
         $day7 = new Day7();
 
         $day7->setDebugInput(<<<TXT
-NO_EXAMPLE_INITIALIZED
+16,1,2,0,4,2,7,1,2,14
 TXT
         );
 
-        self::assertSame('NO_SOLUTION_INITIALIZED', $day7->solvePartOne());
+        self::assertSame('37', $day7->solvePartOne());
     }
 
     public function testSolvePartOne(): void
     {
         $day7 = new Day7();
 
-        self::assertSame('NO_SOLUTION_INITIALIZED', $day7->solvePartOne());
+        self::assertSame('328262', $day7->solvePartOne());
     }
 
     public function testSolvePartTwoExample(): void
@@ -32,17 +32,24 @@ TXT
         $day7 = new Day7();
 
         $day7->setDebugInput(<<<TXT
-NO_EXAMPLE_INITIALIZED
+16,1,2,0,4,2,7,1,2,14
 TXT
         );
 
-        self::assertSame('NO_SOLUTION_INITIALIZED', $day7->solvePartTwo());
+        self::assertSame('168', $day7->solvePartTwo());
+    }
+
+    public function testSolvePartTwoTooHigh(): void
+    {
+        $day7 = new Day7();
+
+        self::assertLessThan('90041060', $day7->solvePartTwo());
     }
 
     public function testSolvePartTwo(): void
     {
         $day7 = new Day7();
 
-        self::assertSame('NO_SOLUTION_INITIALIZED', $day7->solvePartTwo());
+        self::assertSame('90040997', $day7->solvePartTwo());
     }
 }
