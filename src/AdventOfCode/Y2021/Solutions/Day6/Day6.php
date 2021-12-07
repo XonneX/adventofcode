@@ -6,6 +6,9 @@ namespace XonneX\AdventOfCode\Y2021\Solutions\Day6;
 
 use XonneX\AdventOfCode\Core\AbstractSolution;
 
+use function array_fill;
+use function array_sum;
+
 use function count;
 use function explode;
 
@@ -41,14 +44,29 @@ class Day6 extends AbstractSolution
 
     protected function partTwo(string $input): string
     {
-        $state = explode(',', $input);
+        $states = explode(',', $input);
 
-        foreach ($state as $key => $value) {
-            $state[$key] = (int) $value;
+        $counts = array_fill(0, 9, 0);
+
+        foreach ($states as $state) {
+            $counts[$state]++;
         }
 
+        for ($i = 0; $i < 256; $i++) {
+            $newCounts = array_fill(0, 9, 0);
 
+            foreach ($counts as $key => $count) {
+                if ($key === 0) {
+                    $newCounts[6] += $count;
+                    $newCounts[8] += $count;
+                } else {
+                    $newCounts[$key - 1] += $count;
+                }
+            }
 
-        return (string) count($state);
+            $counts = $newCounts;
+        }
+
+        return (string) array_sum($counts);
     }
 }

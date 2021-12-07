@@ -43,6 +43,6 @@ TXT
     {
         $day6 = new Day6();
 
-        self::assertSame('NO_SOLUTION_INITIALIZED', $day6->solvePartTwo());
+        self::assertSame('1629570219571', $day6->solvePartTwo());
     }
 }
