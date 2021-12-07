@@ -9,7 +9,6 @@ use XonneX\AdventOfCode\Core\AbstractSolution;
 
 use function count;
 use function explode;
-use function var_dump;
 
 class Day4 extends AbstractSolution
 {

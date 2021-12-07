@@ -4,13 +4,11 @@ declare(strict_types=1);
 
 namespace XonneX\AdventOfCode\Y2021\Solutions\Day7;
 
-use RuntimeException;
 use XonneX\AdventOfCode\Core\AbstractSolution;
 
 use function array_sum;
 use function explode;
 use function range;
-use function var_dump;
 
 class Day7 extends AbstractSolution
 {

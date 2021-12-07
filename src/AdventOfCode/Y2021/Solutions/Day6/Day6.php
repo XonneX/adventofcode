@@ -8,7 +8,6 @@ use XonneX\AdventOfCode\Core\AbstractSolution;
 
 use function array_fill;
 use function array_sum;
-
 use function count;
 use function explode;
 

@@ -4,18 +4,12 @@ declare(strict_types=1);
 
 namespace XonneX\AdventOfCode\Y2021\Solutions\Day5;
 
-use RuntimeException;
 use XonneX\AdventOfCode\Core\AbstractSolution;
 
 use function array_key_exists;
 use function array_shift;
 use function explode;
-
-use function microtime;
-
 use function rsort;
-
-use const PHP_EOL;
 
 class Day5 extends AbstractSolution
 {

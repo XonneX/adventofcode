@@ -6,10 +6,7 @@ use Stringable;
 
 use function array_shift;
 use function range;
-use function sort;
 use function sprintf;
-
-use function var_dump;
 
 use const PHP_EOL;
 

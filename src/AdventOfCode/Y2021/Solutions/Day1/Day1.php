@@ -4,13 +4,10 @@ declare(strict_types=1);
 
 namespace XonneX\AdventOfCode\Y2021\Solutions\Day1;
 
-use RuntimeException;
 use XonneX\AdventOfCode\Core\AbstractSolution;
 
 use function array_key_exists;
 use function explode;
-
-use const PHP_EOL;
 
 class Day1 extends AbstractSolution
 {
