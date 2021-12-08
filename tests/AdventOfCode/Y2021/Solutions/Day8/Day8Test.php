@@ -12,7 +12,8 @@ class Day8Test extends TestCase
     {
         $day8 = new Day8();
 
-        $day8->setDebugInput(<<<TXT
+        $day8->setDebugInput(
+            <<<TXT
 NO_EXAMPLE_INITIALIZED
 TXT
         );
@@ -27,22 +28,63 @@ TXT
         self::assertSame('NO_SOLUTION_INITIALIZED', $day8->solvePartOne());
     }
 
-    public function testSolvePartTwoExample(): void
+    public function testSolvePartTwoExampleOne(): void
     {
         $day8 = new Day8();
 
-        $day8->setDebugInput(<<<TXT
-NO_EXAMPLE_INITIALIZED
+        $day8->setDebugInput(
+            <<<TXT
+acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb ab | cdfeb fcadb cdfeb cdbaf
 TXT
         );
 
-        self::assertSame('NO_SOLUTION_INITIALIZED', $day8->solvePartTwo());
+        self::assertSame('5353', $day8->solvePartTwo());
+    }
+
+    public function testSolvePartTwoExampleTwo(): void
+    {
+        $day8 = new Day8();
+
+        $day8->setDebugInput(
+            <<<TXT
+be cfbegad cbdgef fgaecd cgeb fdcge agebfd fecdb fabcd edb | fdgacbe cefdb cefbgd gcbe
+edbfga begcd cbg gc gcadebf fbgde acbgfd abcde gfcbed gfec | fcgedb cgb dgebacf gc
+fgaebd cg bdaec gdafb agbcfd gdcbef bgcad gfac gcb cdgabef | cg cg fdcagb cbg
+fbegcd cbd adcefb dageb afcb bc aefdc ecdab fgdeca fcdbega | efabcd cedba gadfec cb
+aecbfdg fbg gf bafeg dbefa fcge gcbea fcaegb dgceab fcbdga | gecf egdcabf bgf bfgea
+fgeab ca afcebg bdacfeg cfaedg gcfdb baec bfadeg bafgc acf | gebdcfa ecba ca fadegcb
+dbcfg fgd bdegcaf fgec aegbdf ecdfab fbedc dacgb gdcebf gf | cefg dcbef fcge gbcadfe
+bdfegc cbegaf gecbf dfcage bdacg ed bedf ced adcbefg gebcd | ed bcgafe cdgba cbgef
+egadfb cdbfeg cegd fecab cgb gbdefca cg fgcdab egfdb bfceg | gbdfcae bgc cg cgb
+gcafb gcf dcaebfg ecagb gf abcdeg gaef cafbge fdbac fegbdc | fgae cfgab fg bagce
+TXT
+        );
+
+        self::assertSame('61229', $day8->solvePartTwo());
     }
 
     public function testSolvePartTwo(): void
     {
         $day8 = new Day8();
 
-        self::assertSame('NO_SOLUTION_INITIALIZED', $day8->solvePartTwo());
+        self::assertSame('978171', $day8->solvePartTwo());
+    }
+
+    public function testAllInThere(): void
+    {
+        $day8 = new Day8();
+
+        self::assertTrue($day8->allInThere([0, 1], [0, 1]));
+        self::assertTrue($day8->allInThere([0, 1], [0, 1, 2]));
+        self::assertFalse($day8->allInThere([0, 1], [0]));
+    }
+
+    public function testSame(): void
+    {
+        $day8 = new Day8();
+
+        self::assertTrue($day8->same([0,1],[0,1]));
+        self::assertFalse($day8->same([0],[0,1]));
+        self::assertFalse($day8->same([0,1],[0]));
     }
 }
