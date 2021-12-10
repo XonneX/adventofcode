@@ -13,18 +13,27 @@ class Day10Test extends TestCase
         $day10 = new Day10();
 
         $day10->setDebugInput(<<<TXT
-NO_EXAMPLE_INITIALIZED
+[({(<(())[]>[[{[]{<()<>>
+[(()[<>])]({[<{<<[]>>(
+{([(<{}[<>[]}>{[]{[(<()>
+(((({<>}<{<{<>}{[]{[]{}
+[[<[([]))<([[{}[[()]]]
+[{[{({}]{}}([{[{{{}}([]
+{<[[]]>}<{[{[{[]{()[[[]
+[<(<(<(<{}))><([]([]()
+<{([([[(<>()){}]>(<<{{
+<{([{{}}[<[[[<>{}]]]>[]]
 TXT
         );
 
-        self::assertSame('NO_SOLUTION_INITIALIZED', $day10->solvePartOne());
+        self::assertSame('26397', $day10->solvePartOne());
     }
 
     public function testSolvePartOne(): void
     {
         $day10 = new Day10();
 
-        self::assertSame('NO_SOLUTION_INITIALIZED', $day10->solvePartOne());
+        self::assertSame('413733', $day10->solvePartOne());
     }
 
     public function testSolvePartTwoExample(): void
@@ -32,17 +41,26 @@ TXT
         $day10 = new Day10();
 
         $day10->setDebugInput(<<<TXT
-NO_EXAMPLE_INITIALIZED
+[({(<(())[]>[[{[]{<()<>>
+[(()[<>])]({[<{<<[]>>(
+{([(<{}[<>[]}>{[]{[(<()>
+(((({<>}<{<{<>}{[]{[]{}
+[[<[([]))<([[{}[[()]]]
+[{[{({}]{}}([{[{{{}}([]
+{<[[]]>}<{[{[{[]{()[[[]
+[<(<(<(<{}))><([]([]()
+<{([([[(<>()){}]>(<<{{
+<{([{{}}[<[[[<>{}]]]>[]]
 TXT
         );
 
-        self::assertSame('NO_SOLUTION_INITIALIZED', $day10->solvePartTwo());
+        self::assertSame('288957', $day10->solvePartTwo());
     }
 
     public function testSolvePartTwo(): void
     {
         $day10 = new Day10();
 
-        self::assertSame('NO_SOLUTION_INITIALIZED', $day10->solvePartTwo());
+        self::assertSame('3354640192', $day10->solvePartTwo());
     }
 }
