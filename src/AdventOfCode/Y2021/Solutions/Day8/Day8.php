@@ -4,24 +4,14 @@ declare(strict_types=1);
 
 namespace XonneX\AdventOfCode\Y2021\Solutions\Day8;
 
-use RuntimeException;
 use XonneX\AdventOfCode\Core\AbstractSolution;
 
 use function array_diff;
-use function array_intersect;
-use function array_values;
 use function count;
 use function explode;
-use function implode;
-use function in_array;
-use function print_r;
-use function str_contains;
-use function str_replace;
 use function str_split;
 use function strlen;
 use function var_dump;
-
-use const PHP_EOL;
 
 class Day8 extends AbstractSolution
 {
@@ -32,7 +22,24 @@ class Day8 extends AbstractSolution
 
     protected function partOne(string $input): string
     {
-        throw new RuntimeException('Not implemented yet');
+        $lines = explode("\n", $input);
+
+        $counter = 0;
+        foreach ($lines as $line) {
+            [, $fourDigitOutputValues] = explode(' | ', $line);
+            $fourDigitOutputValues = explode(' ', $fourDigitOutputValues);
+
+            foreach ($fourDigitOutputValues as $fourDigitOutputValue) {
+                $fourDigitOutputValue = trim($fourDigitOutputValue);
+                $len = strlen($fourDigitOutputValue);
+
+                if ($len === 2 || $len === 4 || $len === 3 || $len === 7) {
+                    $counter++;
+                }
+            }
+        }
+
+        return (string) $counter;
     }
 
     protected function partTwo(string $input): string
