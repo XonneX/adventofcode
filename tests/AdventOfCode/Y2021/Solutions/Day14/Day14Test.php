@@ -13,18 +13,35 @@ class Day14Test extends TestCase
         $day14 = new Day14();
 
         $day14->setDebugInput(<<<TXT
-NO_EXAMPLE_INITIALIZED
+NNCB
+
+CH -> B
+HH -> N
+CB -> H
+NH -> C
+HB -> C
+HC -> B
+HN -> C
+NN -> C
+BH -> H
+NC -> B
+NB -> B
+BN -> B
+BB -> N
+BC -> B
+CC -> N
+CN -> C
 TXT
         );
 
-        self::assertSame('NO_SOLUTION_INITIALIZED', $day14->solvePartOne());
+        self::assertSame('1588', $day14->solvePartOne());
     }
 
     public function testSolvePartOne(): void
     {
         $day14 = new Day14();
 
-        self::assertSame('NO_SOLUTION_INITIALIZED', $day14->solvePartOne());
+        self::assertSame('2657', $day14->solvePartOne());
     }
 
     public function testSolvePartTwoExample(): void
@@ -32,11 +49,28 @@ TXT
         $day14 = new Day14();
 
         $day14->setDebugInput(<<<TXT
-NO_EXAMPLE_INITIALIZED
+NNCB
+
+CH -> B
+HH -> N
+CB -> H
+NH -> C
+HB -> C
+HC -> B
+HN -> C
+NN -> C
+BH -> H
+NC -> B
+NB -> B
+BN -> B
+BB -> N
+BC -> B
+CC -> N
+CN -> C
 TXT
         );
 
-        self::assertSame('NO_SOLUTION_INITIALIZED', $day14->solvePartTwo());
+        self::assertSame('2188189693529', $day14->solvePartTwo());
     }
 
     public function testSolvePartTwo(): void
