@@ -13,11 +13,13 @@ class Day2Test extends TestCase
         $day2 = new Day2();
 
         $day2->setDebugInput(<<<TXT
-NO_EXAMPLE_INITIALIZED
+A Y
+B X
+C Z
 TXT
         );
 
-        self::assertSame('NO_SOLUTION_INITIALIZED', $day2->solvePartOne());
+        self::assertSame('15', $day2->solvePartOne());
     }
 
     public function testSolvePartOne(): void

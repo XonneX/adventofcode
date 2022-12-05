@@ -13,11 +13,16 @@ class Day3Test extends TestCase
         $day3 = new Day3();
 
         $day3->setDebugInput(<<<TXT
-NO_EXAMPLE_INITIALIZED
+vJrwpWtwJgWrhcsFMMfFFhFp
+jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL
+PmmdzqPrVvPwwTWBwg
+wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn
+ttgJtRGJQctTZtZT
+CrZsJsPPZsGzwwsLwLmpwMDw
 TXT
         );
 
-        self::assertSame('NO_SOLUTION_INITIALIZED', $day3->solvePartOne());
+        self::assertSame('157', $day3->solvePartOne());
     }
 
     public function testSolvePartOne(): void

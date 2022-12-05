@@ -13,11 +13,16 @@ class Day4Test extends TestCase
         $day4 = new Day4();
 
         $day4->setDebugInput(<<<TXT
-NO_EXAMPLE_INITIALIZED
+2-4,6-8
+2-3,4-5
+5-7,7-9
+2-8,3-7
+6-6,4-6
+2-6,4-8
 TXT
         );
 
-        self::assertSame('NO_SOLUTION_INITIALIZED', $day4->solvePartOne());
+        self::assertSame('2', $day4->solvePartOne());
     }
 
     public function testSolvePartOne(): void
