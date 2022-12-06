@@ -37,7 +37,7 @@ TXT
     {
         $day1 = new Day1();
 
-        self::assertSame('NO_SOLUTION_INITIALIZED', $day1->solvePartOne());
+        self::assertSame('67633', $day1->solvePartOne());
     }
 
     public function testSolvePartTwoExample(): void
@@ -69,6 +69,6 @@ TXT
     {
         $day1 = new Day1();
 
-        self::assertSame('NO_SOLUTION_INITIALIZED', $day1->solvePartTwo());
+        self::assertSame('199628', $day1->solvePartTwo());
     }
 }

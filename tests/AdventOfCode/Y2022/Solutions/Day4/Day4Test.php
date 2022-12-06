@@ -29,7 +29,7 @@ TXT
     {
         $day4 = new Day4();
 
-        self::assertSame('NO_SOLUTION_INITIALIZED', $day4->solvePartOne());
+        self::assertSame('431', $day4->solvePartOne());
     }
 
     public function testSolvePartTwoExample(): void
