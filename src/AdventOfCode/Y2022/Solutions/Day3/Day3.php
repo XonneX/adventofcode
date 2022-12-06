@@ -10,10 +10,16 @@ use XonneX\AdventOfCode\Core\AbstractSolution;
 use function array_flip;
 use function array_merge;
 use function array_reverse;
+use function count;
+use function explode;
+use function implode;
 use function in_array;
+use function join;
 use function range;
 use function str_split;
+use function strlen;
 use function substr;
+use function var_dump;
 
 class Day3 extends AbstractSolution
 {
@@ -65,6 +71,76 @@ class Day3 extends AbstractSolution
 
     protected function partTwo(string $input): string
     {
-        throw new RuntimeException('Not implemented yet');
+        $lines = explode("\n", $input);
+
+        $priorities = array_merge(
+            ['asd'],
+            range('a', 'z'),
+            range('A', 'Z'),
+        );
+
+        $priorities = array_flip($priorities);
+
+        $sum = 0;
+        $cl = (count($lines) / 3) - 1;
+        for ($i = 0; $i < $cl; $i++) {
+            $s1 = str_split($lines[$cl * 3]);
+            $s2 = str_split($lines[$cl * 3 + 1]);
+            $s3 = str_split($lines[$cl * 3 + 2]);
+
+            $sum += $priorities[$this->findCommon($s1, $s2, $s3)];
+        }
+
+        return (string) $sum;
+    }
+
+    private function findCommon($ar1, $ar2, $ar3): string
+    {
+        $n1 = count($ar1);
+        $n2 = count($ar2);
+        $n3 = count($ar3);
+
+        // Initialize starting indexes for
+        // ar1[], ar2[] and ar3[]
+        $i = 0; $j = 0; $k = 0;
+
+        // Iterate through three arrays while
+        // all arrays have elements
+        while ($i < $n1 && $j < $n2 && $k < $n3)
+        {
+
+            // If x = y and y = z, print any
+            // of them and move ahead in all
+            // arrays
+            if ($ar1[$i] == $ar2[$j] &&
+                $ar2[$j] == $ar3[$k])
+            {
+                return $ar1[$i];
+                $i++;
+                $j++;
+                $k++;
+            }
+
+            // x < y
+            else if ($ar1[$i] < $ar2[$j])
+            {
+                $i++;
+            }
+
+            // y < z
+            else if ($ar2[$j] < $ar3[$k])
+            {
+                $j++;
+            }
+
+            // We reach here when x > y and
+            // z < y, i.e., z is smallest
+            else
+            {
+                $k++;
+            }
+        }
+
+        return 'asd';
     }
 }

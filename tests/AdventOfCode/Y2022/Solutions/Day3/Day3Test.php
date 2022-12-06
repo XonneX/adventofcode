@@ -37,11 +37,16 @@ TXT
         $day3 = new Day3();
 
         $day3->setDebugInput(<<<TXT
-NO_EXAMPLE_INITIALIZED
+vJrwpWtwJgWrhcsFMMfFFhFp
+jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL
+PmmdzqPrVvPwwTWBwg
+wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn
+ttgJtRGJQctTZtZT
+CrZsJsPPZsGzwwsLwLmpwMDw
 TXT
         );
 
-        self::assertSame('NO_SOLUTION_INITIALIZED', $day3->solvePartTwo());
+        self::assertSame('70', $day3->solvePartTwo());
     }
 
     public function testSolvePartTwo(): void
