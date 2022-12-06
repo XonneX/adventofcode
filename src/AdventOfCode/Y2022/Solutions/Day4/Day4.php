@@ -8,6 +8,7 @@ use RuntimeException;
 use XonneX\AdventOfCode\Core\AbstractSolution;
 
 use function explode;
+use function var_dump;
 
 class Day4 extends AbstractSolution
 {
@@ -39,6 +40,24 @@ class Day4 extends AbstractSolution
 
     protected function partTwo(string $input): string
     {
-        throw new RuntimeException('Not implemented yet');
+        $lines = explode("\n", $input);
+
+        $count = 0;
+        foreach ($lines as $line) {
+            [$r1, $r2] = explode(',', $line);
+            [$s1, $e1] = explode('-', $r1);
+            [$s2, $e2] = explode('-', $r2);
+
+            if (
+                ($s1 >= $s2 && $s1 <= $e2)
+                || ($e1 >= $s2 && $e1 <= $e2)
+                || ($s2 >= $s1 && $s2 <= $e1)
+                || ($e2 >= $s1 && $e2 <= $e1)
+            ) {
+                $count++;
+            }
+        }
+
+        return (string) $count;
     }
 }
