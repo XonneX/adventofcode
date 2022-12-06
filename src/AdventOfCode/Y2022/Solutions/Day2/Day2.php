@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace XonneX\AdventOfCode\Y2022\Solutions\Day2;
 
-use RuntimeException;
 use XonneX\AdventOfCode\Core\AbstractSolution;
+
+use function explode;
 
 class Day2 extends AbstractSolution
 {
@@ -58,6 +59,43 @@ class Day2 extends AbstractSolution
 
     protected function partTwo(string $input): string
     {
-        throw new RuntimeException('Not implemented yet');
+        $lines = explode("\n", $input);
+
+        $score = 0;
+        foreach ($lines as $line) {
+            [$s1, $s2] = explode(' ', $line);
+
+            $opponent = match($s1) {
+                'A' => self::ROCK,
+                'B' => self::PAPER,
+                'C' => self::SCISSORS,
+            };
+
+            if ($s2 === 'X') {
+                $me = match($opponent) {
+                    self::ROCK => self::SCISSORS,
+                    self::PAPER => self::ROCK,
+                    self::SCISSORS => self::PAPER,
+                };
+            } elseif ($s2 === 'Y') {
+                $me = match($opponent) {
+                    self::ROCK => self::ROCK,
+                    self::PAPER => self::PAPER,
+                    self::SCISSORS => self::SCISSORS,
+                };
+            } else {
+                $me = self::WIN[$opponent];
+            }
+
+            $score += $me;
+
+            if ($opponent === $me) {
+                $score += 3;
+            } elseif ($me === self::WIN[$opponent]) {
+                $score += 6;
+            }
+        }
+
+        return (string) $score;
     }
 }

@@ -34,11 +34,13 @@ TXT
         $day2 = new Day2();
 
         $day2->setDebugInput(<<<TXT
-NO_EXAMPLE_INITIALIZED
+A Y
+B X
+C Z
 TXT
         );
 
-        self::assertSame('NO_SOLUTION_INITIALIZED', $day2->solvePartTwo());
+        self::assertSame('12', $day2->solvePartTwo());
     }
 
     public function testSolvePartTwo(): void
