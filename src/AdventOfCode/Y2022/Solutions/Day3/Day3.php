@@ -8,7 +8,9 @@ use RuntimeException;
 use XonneX\AdventOfCode\Core\AbstractSolution;
 
 use function array_flip;
+use function array_intersect;
 use function array_merge;
+use function array_pop;
 use function array_reverse;
 use function count;
 use function explode;
@@ -83,64 +85,16 @@ class Day3 extends AbstractSolution
 
         $sum = 0;
         $cl = (count($lines) / 3) - 1;
-        for ($i = 0; $i < $cl; $i++) {
-            $s1 = str_split($lines[$cl * 3]);
-            $s2 = str_split($lines[$cl * 3 + 1]);
-            $s3 = str_split($lines[$cl * 3 + 2]);
+        for ($i = 0; $i <= $cl; $i++) {
+            $s1 = str_split($lines[$i * 3]);
+            $s2 = str_split($lines[$i * 3 + 1]);
+            $s3 = str_split($lines[$i * 3 + 2]);
 
-            $sum += $priorities[$this->findCommon($s1, $s2, $s3)];
+            $r = array_intersect($s1, $s2, $s3);
+            $c = array_pop($r);
+            $sum += $priorities[$c];
         }
 
         return (string) $sum;
-    }
-
-    private function findCommon($ar1, $ar2, $ar3): string
-    {
-        $n1 = count($ar1);
-        $n2 = count($ar2);
-        $n3 = count($ar3);
-
-        // Initialize starting indexes for
-        // ar1[], ar2[] and ar3[]
-        $i = 0; $j = 0; $k = 0;
-
-        // Iterate through three arrays while
-        // all arrays have elements
-        while ($i < $n1 && $j < $n2 && $k < $n3)
-        {
-
-            // If x = y and y = z, print any
-            // of them and move ahead in all
-            // arrays
-            if ($ar1[$i] == $ar2[$j] &&
-                $ar2[$j] == $ar3[$k])
-            {
-                return $ar1[$i];
-                $i++;
-                $j++;
-                $k++;
-            }
-
-            // x < y
-            else if ($ar1[$i] < $ar2[$j])
-            {
-                $i++;
-            }
-
-            // y < z
-            else if ($ar2[$j] < $ar3[$k])
-            {
-                $j++;
-            }
-
-            // We reach here when x > y and
-            // z < y, i.e., z is smallest
-            else
-            {
-                $k++;
-            }
-        }
-
-        return 'asd';
     }
 }
