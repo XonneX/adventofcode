@@ -13,18 +13,26 @@ class Day5Test extends TestCase
         $day5 = new Day5();
 
         $day5->setDebugInput(<<<TXT
-NO_EXAMPLE_INITIALIZED
+    [D]    
+[N] [C]    
+[Z] [M] [P]
+ 1   2   3 
+
+move 1 from 2 to 1
+move 3 from 1 to 3
+move 2 from 2 to 1
+move 1 from 1 to 2
 TXT
         );
 
-        self::assertSame('NO_SOLUTION_INITIALIZED', $day5->solvePartOne());
+        self::assertSame('CMZ', $day5->solvePartOne());
     }
 
     public function testSolvePartOne(): void
     {
         $day5 = new Day5();
 
-        self::assertSame('NO_SOLUTION_INITIALIZED', $day5->solvePartOne());
+        self::assertSame('NTWZZWHFV', $day5->solvePartOne());
     }
 
     public function testSolvePartTwoExample(): void
@@ -32,17 +40,25 @@ TXT
         $day5 = new Day5();
 
         $day5->setDebugInput(<<<TXT
-NO_EXAMPLE_INITIALIZED
+    [D]    
+[N] [C]    
+[Z] [M] [P]
+ 1   2   3 
+
+move 1 from 2 to 1
+move 3 from 1 to 3
+move 2 from 2 to 1
+move 1 from 1 to 2
 TXT
         );
 
-        self::assertSame('NO_SOLUTION_INITIALIZED', $day5->solvePartTwo());
+        self::assertSame('MCD', $day5->solvePartTwo());
     }
 
     public function testSolvePartTwo(): void
     {
         $day5 = new Day5();
 
-        self::assertSame('NO_SOLUTION_INITIALIZED', $day5->solvePartTwo());
+        self::assertSame('BRZGFVBTJ', $day5->solvePartTwo());
     }
 }
