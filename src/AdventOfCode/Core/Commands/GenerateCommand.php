@@ -10,54 +10,96 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use XonneX\AdventOfCode\Core\Utils\Templates;
+use XonneX\AdventOfCode\Core\Utils\Path;
 
+use function date;
+use function file_exists;
+use function file_put_contents;
 use function is_dir;
+use function var_dump;
 
-#[AsCommand("generate")]
+#[AsCommand("generate", "Generates the necessary files for one day")]
 class GenerateCommand extends Command
 {
-    protected function configure()
+    private int $day;
+    private int $year;
+    private bool $overwrite;
+    private string $inputFile;
+    private string $solutionFile;
+    private string $testFile;
+
+    protected function configure(): void
     {
-        $this->addArgument('day', InputArgument::OPTIONAL);
-        $this->addArgument('year', InputArgument::OPTIONAL);
+        $this->addArgument('day', InputArgument::OPTIONAL, 'The day to generate', date('d'));
+        $this->addArgument('year', InputArgument::OPTIONAL, 'The year to generate', date('Y'));
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         assert($output instanceof SymfonyStyle);
 
-        if ($input->hasArgument('day')) {
-            $day = (int) $input->getArgument('day');
-
-            if ($day > 24 || $day < 1) {
-                $output->error('Argument day must be between 1 and 24');
-
-                return self::FAILURE;
-            }
-        } else {
-            $day = (int) date('d');
+        if (
+            !$this->parseDay($input, $output)
+            || !$this->parseYear($input, $output)
+        ) {
+            return self::FAILURE;
         }
 
-        if ($input->hasArgument('year')) {
-            $year = (int) $input->getArgument('year');
+        $this->parseOverwrite($input, $output);
 
-            if ($year > 24 || $year < 1) {
-                $output->error('Argument year must be greater or equal to 2020');
-
-                return self::FAILURE;
-            }
-        } else {
-            $year = (int) date('Y');
+        if (!$this->fileSetup($output)) {
+            return self::FAILURE;
         }
 
-        $inputDirectory = __DIR__ . '/../../../../inputs/' . $year;
-        $inputFile = $inputDirectory . '/day' . $day . '.txt';
+        $this->writeTemplate($output, $this->solutionFile, Templates::getSolutionTemplate());
+        $this->writeTemplate($output, $this->testFile, Templates::getTestTemplate());
+        $this->writeTemplate($output, $this->inputFile);
 
-        $solutionDirectory = __DIR__ . '/../../Y' . $year;
-        $solutionFile = $solutionDirectory . '/Y' . $year . 'Day' . $day . '.php';
+        return self::SUCCESS;
+    }
 
-        $testDirectory = __DIR__ . '/../../../../tests/AdventOfCode/Y' . $year;
-        $testFile = $testDirectory . '/Y' . $year . 'Day' . $day . 'Test.php';
+    private function parseDay(InputInterface $input, SymfonyStyle $output): bool
+    {
+        $this->day = (int) $input->getArgument('day');
+
+        if ($this->day > 24 || $this->day < 1) {
+            $output->error('Argument day must be between 1 and 24');
+
+            return false;
+        }
+
+        return true;
+    }
+
+    private function parseYear(InputInterface $input, SymfonyStyle $output): bool
+    {
+        $this->year = (int) $input->getArgument('year');
+
+        if ($this->year < 2020) {
+            $output->error('Argument year must be greater or equal to 2020');
+
+            return false;
+        }
+
+        return true;
+    }
+
+    private function parseOverwrite(InputInterface $input, SymfonyStyle $output): void
+    {
+        $this->overwrite = $input->hasOption('overwrite');
+    }
+
+    private function fileSetup(SymfonyStyle $output): bool
+    {
+        $inputDirectory = __DIR__ . '/../../../../inputs/' . $this->year;
+        $this->inputFile = $inputDirectory . '/day' . $this->day . '.txt';
+
+        $solutionDirectory = __DIR__ . '/../../Y' . $this->year;
+        $this->solutionFile = $solutionDirectory . '/Y' . $this->year . 'Day' . $this->day . '.php';
+
+        $testDirectory = __DIR__ . '/../../../../tests/AdventOfCode/Y' . $this->year;
+        $this->testFile = $testDirectory . '/Y' . $this->year . 'Day' . $this->day . 'Test.php';
 
         if (
             !$this->mkdir($inputDirectory)
@@ -65,9 +107,11 @@ class GenerateCommand extends Command
             || !$this->mkdir($testDirectory)
         ) {
             $output->error('Cannot create one of the directories');
+
+            return false;
         }
 
-        
+        return true;
     }
 
     private function mkdir(string $directory): bool
@@ -77,91 +121,24 @@ class GenerateCommand extends Command
                  && !is_dir($directory));
     }
 
-    private function getSolutionTemplate(): string
+    private function writeTemplate(SymfonyStyle $output, string $file, string $template = ''): void
     {
-        return <<<'PHP'
-<?php
-
-declare(strict_types=1);
-
-namespace XonneX\AdventOfCode\Y{{ YEAR }};
-
-use RuntimeException;
-use XonneX\AdventOfCode\Core\AbstractSolution;
-
-class Y{{ YEAR }}Day{{ DAY }} extends AbstractSolution
-{
-    public function __construct()
-    {
-        parent::__construct({{ YEAR }}, {{ DAY }});
-    } 
-
-    protected function partOne(string $input): string
-    {
-        throw new RuntimeException('Not implemented yet');
-    }
-
-    protected function partTwo(string $input): string
-    {
-        throw new RuntimeException('Not implemented yet');
-    }
-}
-
-PHP;
-    }
-
-    private function getTestTemplate(): string
-    {
-        return <<<'PHP'
-<?php
-
-declare(strict_types=1);
-
-namespace XonneX\AdventOfCode\Y{{ YEAR }};
-
-use PHPUnit\Framework\TestCase;
-
-class Y{{ YEAR }}Day{{ DAY }}Test extends TestCase
-{
-    public function testSolvePartOneExample(): void
-    {
-        $day = new Y{{ YEAR }}Day{{ DAY }}();
-
-        $day->setDebugInput(<<<TXT
-NO_EXAMPLE_INITIALIZED
-TXT
+        $template = str_replace(
+            ['{{ YEAR }}', '{{ DAY }}'],
+            [$this->year, $this->day],
+            $template
         );
 
-        self::assertSame('NO_SOLUTION_INITIALIZED', $day->solvePartOne());
-    }
-
-    public function testSolvePartOne(): void
-    {
-        $day = new Y{{ YEAR }}Day{{ DAY }}();
-
-        self::assertSame('NO_SOLUTION_INITIALIZED', $day->solvePartOne());
-    }
-
-    public function testSolvePartTwoExample(): void
-    {
-        $day = new Y{{ YEAR }}Day{{ DAY }}();
-
-        $day->setDebugInput(<<<TXT
-NO_EXAMPLE_INITIALIZED
-TXT
-        );
-
-        self::assertSame('NO_SOLUTION_INITIALIZED', $day->solvePartTwo());
-    }
-
-    public function testSolvePartTwo(): void
-    {
-        $day = new Y{{ YEAR }}Day{{ DAY }}();
-
-        self::assertSame('NO_SOLUTION_INITIALIZED', $day->solvePartTwo());
-    }
-}
-
-PHP;
+        if (file_exists($file)) {
+            if ($this->overwrite) {
+                file_put_contents($file, $template);
+            } else {
+                $output->warning(
+                    'File already exists and overwrite option is not set: ' . Path::removeProjectPath($file)
+                );
+            }
+        } else {
+            file_put_contents($file, $template);
+        }
     }
 }
