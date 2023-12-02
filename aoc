@@ -1,0 +1,15 @@
+#!/usr/bin/env php
+<?php
+
+use Symfony\Component\Console\Application;
+use Symfony\Component\Console\Input\ArgvInput;
+use Symfony\Component\Console\Output\ConsoleOutput;
+use Symfony\Component\Console\Style\SymfonyStyle;
+
+require __DIR__ . '/vendor/autoload.php';
+
+$application = new Application();
+
+$input = new ArgvInput();
+$output = new SymfonyStyle($input, new ConsoleOutput());
+$application->run($input, $output);

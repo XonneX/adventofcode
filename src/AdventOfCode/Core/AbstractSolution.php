@@ -12,7 +12,7 @@ abstract class AbstractSolution
     private string $input;
 
     public function __construct(private int $year, private int $day) {
-        $filePath = __DIR__ . sprintf('/../../../inputs/%s/day%s/input.txt', $this->year, $this->day);
+        $filePath = __DIR__ . sprintf('/../../../inputs/%s/day%s.txt', $this->year, $this->day);
 
         if (!is_readable($filePath)) {
             throw new RuntimeException(sprintf('Input file not readable: %s', $filePath));

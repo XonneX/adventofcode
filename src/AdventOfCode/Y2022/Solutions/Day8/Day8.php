@@ -40,7 +40,7 @@ class Day8 extends AbstractSolution
 
         foreach ($forest as $y => $row) {
             foreach ($row as $x => $tree) {
-                for()
+//                for(){}
             }
         }
 
