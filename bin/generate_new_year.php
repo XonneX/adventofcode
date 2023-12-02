@@ -20,12 +20,12 @@ $solutionTemplate = <<<'PHP'
 
 declare(strict_types=1);
 
-namespace XonneX\AdventOfCode\Y{{ YEAR }}\Solutions\Day{{ DAY }};
+namespace XonneX\AdventOfCode\Y{{ YEAR }};
 
 use RuntimeException;
 use XonneX\AdventOfCode\Core\AbstractSolution;
 
-class Day{{ DAY }} extends AbstractSolution
+class Y{{ YEAR }}Day{{ DAY }} extends AbstractSolution
 {
     public function __construct()
     {
@@ -50,48 +50,48 @@ $testTemplate = <<<'PHP'
 
 declare(strict_types=1);
 
-namespace XonneX\AdventOfCode\Y{{ YEAR }}\Solutions\Day{{ DAY }};
+namespace XonneX\AdventOfCode\Y{{ YEAR }};
 
 use PHPUnit\Framework\TestCase;
 
-class Day{{ DAY }}Test extends TestCase
+class Y{{ YEAR }}Day{{ DAY }}Test extends TestCase
 {
     public function testSolvePartOneExample(): void
     {
-        $day{{ DAY }} = new Day{{ DAY }}();
+        $day = new Y{{ YEAR }}Day{{ DAY }}();
 
-        $day{{ DAY }}->setDebugInput(<<<TXT
+        $day->setDebugInput(<<<TXT
 NO_EXAMPLE_INITIALIZED
 TXT
         );
 
-        self::assertSame('NO_SOLUTION_INITIALIZED', $day{{ DAY }}->solvePartOne());
+        self::assertSame('NO_SOLUTION_INITIALIZED', $day->solvePartOne());
     }
 
     public function testSolvePartOne(): void
     {
-        $day{{ DAY }} = new Day{{ DAY }}();
+        $day = new Y{{ YEAR }}Day{{ DAY }}();
 
-        self::assertSame('NO_SOLUTION_INITIALIZED', $day{{ DAY }}->solvePartOne());
+        self::assertSame('NO_SOLUTION_INITIALIZED', $day->solvePartOne());
     }
 
     public function testSolvePartTwoExample(): void
     {
-        $day{{ DAY }} = new Day{{ DAY }}();
+        $day = new Y{{ YEAR }}Day{{ DAY }}();
 
-        $day{{ DAY }}->setDebugInput(<<<TXT
+        $day->setDebugInput(<<<TXT
 NO_EXAMPLE_INITIALIZED
 TXT
         );
 
-        self::assertSame('NO_SOLUTION_INITIALIZED', $day{{ DAY }}->solvePartTwo());
+        self::assertSame('NO_SOLUTION_INITIALIZED', $day->solvePartTwo());
     }
 
     public function testSolvePartTwo(): void
     {
-        $day{{ DAY }} = new Day{{ DAY }}();
+        $day = new Y{{ YEAR }}Day{{ DAY }}();
 
-        self::assertSame('NO_SOLUTION_INITIALIZED', $day{{ DAY }}->solvePartTwo());
+        self::assertSame('NO_SOLUTION_INITIALIZED', $day->solvePartTwo());
     }
 }
 
@@ -100,14 +100,14 @@ PHP;
 $days = range(1, 24);
 
 foreach ($days as $day) {
-    $inputDirectory = sprintf('%s/../inputs/%s/day%s', __DIR__, $year, $day);
-    $inputFile = $inputDirectory . '/input.txt';
+    $inputDirectory = sprintf('%s/../inputs/%s', __DIR__, $year);
+    $inputFile = $inputDirectory . sprintf('/day%s.txt', $day);
 
-    $solutionDirectory = sprintf('%s/../src/AdventOfCode/Y%s/Solutions/Day%s', __DIR__, $year, $day);
-    $solutionFile = sprintf('%s/Day%s.php', $solutionDirectory, $day);
+    $solutionDirectory = sprintf('%s/../src/AdventOfCode/Y%s', __DIR__, $year);
+    $solutionFile = sprintf('%s/Y%sDay%s.php', $solutionDirectory, $year, $day);
 
-    $testDirectory = sprintf('%s/../tests/AdventOfCode/Y%s/Solutions/Day%s', __DIR__, $year, $day);
-    $testFile = sprintf('%s/Day%sTest.php', $testDirectory, $day);
+    $testDirectory = sprintf('%s/../tests/AdventOfCode/Y%s', __DIR__, $year);
+    $testFile = sprintf('%s/Y%sDay%sTest.php', $testDirectory, $year, $day);
 
     if (!is_dir($inputDirectory) && !mkdir($inputDirectory, recursive: true) && !is_dir($inputDirectory)) {
         throw new RuntimeException(sprintf('Directory "%s" was not created', $inputDirectory));
