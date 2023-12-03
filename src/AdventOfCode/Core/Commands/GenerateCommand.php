@@ -5,14 +5,12 @@ declare(strict_types=1);
 namespace XonneX\AdventOfCode\Core\Commands;
 
 use Symfony\Component\Console\Attribute\AsCommand;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use XonneX\AdventOfCode\Core\Utils\Path;
 use XonneX\AdventOfCode\Core\Utils\Templates;
 
-use function date;
 use function file_exists;
 use function file_put_contents;
 use function is_dir;
@@ -41,7 +39,7 @@ class GenerateCommand extends AbstractCommand
             return self::FAILURE;
         }
 
-        $this->parseOverwrite($input, $output);
+        $this->parseOverwrite($input);
 
         if (!$this->fileSetup($output)) {
             return self::FAILURE;
@@ -54,7 +52,7 @@ class GenerateCommand extends AbstractCommand
         return self::SUCCESS;
     }
 
-    private function parseOverwrite(InputInterface $input, SymfonyStyle $output): void
+    private function parseOverwrite(InputInterface $input): void
     {
         $this->overwrite = $input->hasOption('overwrite');
     }
