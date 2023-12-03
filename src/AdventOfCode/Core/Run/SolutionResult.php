@@ -6,21 +6,26 @@ namespace XonneX\AdventOfCode\Core\Run;
 
 use Throwable;
 
-class SolutionPartResult
+class SolutionResult
 {
-    private const SOlVED = 0;
-    private const EXCEPTION = 1;
-    private const UNSOLVED = 2;
+    private const int SOlVED = 0;
+    private const int EXCEPTION = 1;
+    private const int UNSOLVED = 2;
     private int $state = self::UNSOLVED;
     private string $solution;
     private Throwable $throwable;
     private int $year;
     private int $day;
 
-    public function __construct(int $year, int $day)
+    private int $part;
+
+    private int $time;
+
+    public function __construct(int $year, int $day, int $part)
     {
         $this->year = $year;
         $this->day = $day;
+        $this->part = $part;
     }
 
     public function getSolution(): string
@@ -49,7 +54,6 @@ class SolutionPartResult
         return $this->state === self::SOlVED;
     }
 
-
     public function isError(): bool
     {
         return $this->state === self::EXCEPTION;
@@ -68,5 +72,20 @@ class SolutionPartResult
     public function getDay(): int
     {
         return $this->day;
+    }
+
+    public function getPart(): int
+    {
+        return $this->part;
+    }
+
+    public function getTime(): int
+    {
+        return $this->time;
+    }
+
+    public function setTime(int $time): void
+    {
+        $this->time = $time;
     }
 }

@@ -7,18 +7,19 @@ namespace XonneX\AdventOfCode\Core\Commands;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Table;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use XonneX\AdventOfCode\Core\Exceptions\ClassInstantiationException;
+use XonneX\AdventOfCode\Core\Exceptions\ClassNotFoundException;
 use XonneX\AdventOfCode\Core\Run\Runner;
 
 #[AsCommand("run")]
-class RunCommand extends Command
+class RunCommand extends AbstractCommand
 {
     protected function configure(): void
     {
-        $this->addArgument('day', InputArgument::OPTIONAL);
+        $this->addDayYearArguments();
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -26,19 +27,39 @@ class RunCommand extends Command
         assert($output instanceof SymfonyStyle);
         $runner = new Runner();
 
-        $solution = $runner->run(2023, 1);
+        if (
+            !$this->parseDay($input, $output)
+            || !$this->parseYear($input, $output)
+        ) {
+            return self::FAILURE;
+        }
 
-        $solutions = [$solution];
+        try {
+            $solutions = $runner->run($this->getYear(), $this->getDay());
+        } catch (ClassInstantiationException $e) {
+            $output->error('Could not instantiate class reason: ' . $e->getPrevious()?->getMessage());
+
+            return self::FAILURE;
+        } catch (ClassNotFoundException) {
+            $output->error('Could not find anything for this day and year');
+
+            return self::FAILURE;
+        }
 
         $table = new Table($output);
         $table->setHeaders(['Day', 'Part', 'Solution', 'Elapsed time']);
-        $table->addRow(
-            [
-                2023,
-                1,
-                $solution->getPartOne()->getSolution(),
-            ]
-        );
+        foreach ($solutions as $solution) {
+            $table->addRow(
+                [
+                    $solution->getDay(),
+                    $solution->getPart(),
+                    $solution->getSolution(),
+                    $solution->getTime() . ' ms',
+                ]
+            );
+        }
+
+        $table->render();
 
         return Command::SUCCESS;
     }

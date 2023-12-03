@@ -10,16 +10,18 @@ use XonneX\AdventOfCode\Core\Exceptions\ClassInstantiationException;
 use XonneX\AdventOfCode\Core\Exceptions\ClassNotFoundException;
 
 use function class_exists;
+use function microtime;
 
 class Runner
 {
     /**
+     * @return SolutionResult[]
      * @throws ClassNotFoundException
      * @throws ClassInstantiationException
      */
-    public function run(int $year, int $day): SolutionResult
+    public function run(int $year, int $day): array
     {
-        $class = sprintf('XonneX\\AdventOfCode\\Y%s\\Y%sDay%s', $year, ($year - 2000), $day);
+        $class = sprintf('XonneX\\AdventOfCode\\Y%s\\Y%sDay%s', $year, $year, $day);
 
         if (!class_exists($class)) {
             throw new ClassNotFoundException();
@@ -32,20 +34,28 @@ class Runner
             throw new ClassInstantiationException(previous: $throwable);
         }
 
-        $solution = new SolutionResult();
+        $solutionPart1 = new SolutionResult($year, $day, 1);
 
         try {
-            $solution->getPartOne()->setSolution($instance->solvePartOne());
+            $st = (int) (microtime(true) * 1000);
+            $solutionPart1->setSolution($instance->solvePartOne());
+            $et = (int) (microtime(true) * 1000);
+            $solutionPart1->setTime($et - $st);
         } catch (Throwable $throwable) {
-            $solution->getPartOne()->setThrowable($throwable);
+            $solutionPart1->setThrowable($throwable);
         }
+
+        $solutionPart2 = new SolutionResult($year, $day, 2);
 
         try {
-            $solution->getPartTwo()->setSolution($instance->solvePartTwo());
+            $st = (int) (microtime(true) * 1000);
+            $solutionPart2->setSolution($instance->solvePartTwo());
+            $et = (int) (microtime(true) * 1000);
+            $solutionPart2->setTime($et - $st);
         } catch (Throwable $throwable) {
-            $solution->getPartTwo()->setThrowable($throwable);
+            $solutionPart2->setThrowable($throwable);
         }
 
-        return $solution;
+        return [$solutionPart1, $solutionPart2];
     }
 }

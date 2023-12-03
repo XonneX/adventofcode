@@ -6,11 +6,13 @@ use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use XonneX\AdventOfCode\Core\Commands\GenerateCommand;
+use XonneX\AdventOfCode\Core\Commands\RunCommand;
 
 require __DIR__ . '/vendor/autoload.php';
 
 $application = new Application();
 $application->add(new GenerateCommand());
+$application->add(new RunCommand());
 
 $input = new ArgvInput();
 $output = new SymfonyStyle($input, new ConsoleOutput());

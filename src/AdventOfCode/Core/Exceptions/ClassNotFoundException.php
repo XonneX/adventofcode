@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace XonneX\AdventOfCode\Core\Exceptions;
 
-use RuntimeException;
+use Exception;
 
-class ClassNotFoundException extends RuntimeException
+class ClassNotFoundException extends Exception
 {
 
 }

@@ -5,25 +5,21 @@ declare(strict_types=1);
 namespace XonneX\AdventOfCode\Core\Commands;
 
 use Symfony\Component\Console\Attribute\AsCommand;
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use XonneX\AdventOfCode\Core\Utils\Templates;
 use XonneX\AdventOfCode\Core\Utils\Path;
+use XonneX\AdventOfCode\Core\Utils\Templates;
 
 use function date;
 use function file_exists;
 use function file_put_contents;
 use function is_dir;
-use function var_dump;
 
 #[AsCommand("generate", "Generates the necessary files for one day")]
-class GenerateCommand extends Command
+class GenerateCommand extends AbstractCommand
 {
-    private int $day;
-    private int $year;
     private bool $overwrite;
     private string $inputFile;
     private string $solutionFile;
@@ -31,8 +27,7 @@ class GenerateCommand extends Command
 
     protected function configure(): void
     {
-        $this->addArgument('day', InputArgument::OPTIONAL, 'The day to generate', date('d'));
-        $this->addArgument('year', InputArgument::OPTIONAL, 'The year to generate', date('Y'));
+        $this->addDayYearArguments();
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -59,32 +54,6 @@ class GenerateCommand extends Command
         return self::SUCCESS;
     }
 
-    private function parseDay(InputInterface $input, SymfonyStyle $output): bool
-    {
-        $this->day = (int) $input->getArgument('day');
-
-        if ($this->day > 24 || $this->day < 1) {
-            $output->error('Argument day must be between 1 and 24');
-
-            return false;
-        }
-
-        return true;
-    }
-
-    private function parseYear(InputInterface $input, SymfonyStyle $output): bool
-    {
-        $this->year = (int) $input->getArgument('year');
-
-        if ($this->year < 2020) {
-            $output->error('Argument year must be greater or equal to 2020');
-
-            return false;
-        }
-
-        return true;
-    }
-
     private function parseOverwrite(InputInterface $input, SymfonyStyle $output): void
     {
         $this->overwrite = $input->hasOption('overwrite');
@@ -92,14 +61,17 @@ class GenerateCommand extends Command
 
     private function fileSetup(SymfonyStyle $output): bool
     {
-        $inputDirectory = __DIR__ . '/../../../../inputs/' . $this->year;
-        $this->inputFile = $inputDirectory . '/day' . $this->day . '.txt';
+        $year = $this->getYear();
+        $day = $this->getDay();
 
-        $solutionDirectory = __DIR__ . '/../../Y' . $this->year;
-        $this->solutionFile = $solutionDirectory . '/Y' . $this->year . 'Day' . $this->day . '.php';
+        $inputDirectory = __DIR__ . '/../../../../inputs/' . $year;
+        $this->inputFile = $inputDirectory . '/day' . $day . '.txt';
 
-        $testDirectory = __DIR__ . '/../../../../tests/AdventOfCode/Y' . $this->year;
-        $this->testFile = $testDirectory . '/Y' . $this->year . 'Day' . $this->day . 'Test.php';
+        $solutionDirectory = __DIR__ . '/../../Y' . $year;
+        $this->solutionFile = $solutionDirectory . '/Y' . $year . 'Day' . $day . '.php';
+
+        $testDirectory = __DIR__ . '/../../../../tests/AdventOfCode/Y' . $year;
+        $this->testFile = $testDirectory . '/Y' . $year . 'Day' . $day . 'Test.php';
 
         if (
             !$this->mkdir($inputDirectory)
@@ -123,9 +95,12 @@ class GenerateCommand extends Command
 
     private function writeTemplate(SymfonyStyle $output, string $file, string $template = ''): void
     {
+        $year = $this->getYear();
+        $day = $this->getDay();
+
         $template = str_replace(
             ['{{ YEAR }}', '{{ DAY }}'],
-            [$this->year, $this->day],
+            [$year, $day],
             $template
         );
 

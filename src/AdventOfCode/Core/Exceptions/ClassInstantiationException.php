@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace XonneX\AdventOfCode\Core\Exceptions;
 
-use RuntimeException;
+use Exception;
+use Throwable;
 
-class ClassInstantiationException extends RuntimeException
+class ClassInstantiationException extends Exception
 {
-
 }
