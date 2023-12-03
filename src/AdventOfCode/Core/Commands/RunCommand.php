@@ -28,7 +28,6 @@ class RunCommand extends AbstractCommand
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         assert($output instanceof SymfonyStyle);
-        $runner = new Runner();
 
         if (
             !$this->parseDay($input, $output)
@@ -36,6 +35,8 @@ class RunCommand extends AbstractCommand
         ) {
             return self::FAILURE;
         }
+
+        $runner = new Runner();
 
         try {
             $solutions = $runner->run($this->getYear(), $this->getDay());
