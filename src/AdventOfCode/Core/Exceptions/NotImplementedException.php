@@ -8,5 +8,5 @@ use Exception;
 
 class NotImplementedException extends Exception
 {
-
+// TODO: Use this class instead of "throw new RuntimeException('Not implemented yet');" in solutions
 }

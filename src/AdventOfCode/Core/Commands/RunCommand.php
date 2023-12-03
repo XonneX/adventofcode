@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace XonneX\AdventOfCode\Core\Commands;
 
+use Override;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Table;
@@ -17,11 +18,13 @@ use XonneX\AdventOfCode\Core\Run\Runner;
 #[AsCommand("run")]
 class RunCommand extends AbstractCommand
 {
+    #[Override]
     protected function configure(): void
     {
         $this->addDayYearArguments();
     }
 
+    #[Override]
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         assert($output instanceof SymfonyStyle);
