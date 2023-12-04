@@ -15,7 +15,11 @@ use XonneX\AdventOfCode\Core\Run\Runner;
 use function assert;
 use function range;
 
-#[AsCommand('report', 'Generates the report of all days and years')]
+#[AsCommand(
+    name: 'report',
+    description: 'Generates the report of all days and years',
+    aliases: ['re']
+)]
 class ReportCommand extends Command
 {
     #[Override]

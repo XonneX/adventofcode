@@ -16,7 +16,11 @@ use function file_exists;
 use function file_put_contents;
 use function is_dir;
 
-#[AsCommand("generate", "Generates the necessary files for one day")]
+#[AsCommand(
+    name: "generate",
+    description: "Generates the necessary files for one day",
+    aliases:['ge']
+)]
 class GenerateCommand extends AbstractCommand
 {
     private bool $overwrite;

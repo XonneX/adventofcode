@@ -15,7 +15,11 @@ use XonneX\AdventOfCode\Core\Exceptions\ClassInstantiationException;
 use XonneX\AdventOfCode\Core\Exceptions\ClassNotFoundException;
 use XonneX\AdventOfCode\Core\Run\Runner;
 
-#[AsCommand("run")]
+#[AsCommand(
+    name: "run",
+    description: 'Runs solutions',
+    aliases: ['ru']
+)]
 class RunCommand extends AbstractCommand
 {
     #[Override]
