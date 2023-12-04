@@ -6,6 +6,7 @@ use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use XonneX\AdventOfCode\Core\Commands\GenerateCommand;
+use XonneX\AdventOfCode\Core\Commands\LeaderboardCommand;
 use XonneX\AdventOfCode\Core\Commands\ReportCommand;
 use XonneX\AdventOfCode\Core\Commands\RunCommand;
 
@@ -15,6 +16,7 @@ $application = new Application();
 $application->add(new GenerateCommand());
 $application->add(new RunCommand());
 $application->add(new ReportCommand());
+$application->add(new LeaderboardCommand());
 
 $input = new ArgvInput();
 $output = new SymfonyStyle($input, new ConsoleOutput());
