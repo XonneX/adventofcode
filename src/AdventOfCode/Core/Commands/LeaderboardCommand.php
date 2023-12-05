@@ -166,13 +166,18 @@ class LeaderboardCommand extends Command
             foreach ($day as $user) {
                 $userTime = new DateTimeImmutable('@' . $user['time']);
 
-                $diff = $aocTime->diff($userTime);
+                if ($userTime >= $aocTime->add(new DateInterval('P1D'))) {
+                    $time = 'more than 1 day';
+                } else {
+                    $diff = $aocTime->diff($userTime);
+                    $time = $diff->format('%H:%I:%S');
+                }
 
                 $table->addRow(
                     [
                         $user['user'],
                         $user['part'],
-                        $diff->format('%d %H:%I:%S'),
+                        $time,
                     ]
                 );
             }
